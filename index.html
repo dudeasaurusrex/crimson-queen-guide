@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Crimson Queen Necromancer Guide</title>
+    <style>
+        :root {
+            --bg-color: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --accent-color: #c0392b;
+            --text-color: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --border-color: #333;
+            --nav-bg: #111;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            padding-bottom: 80px; /* Space for nav */
+        }
+
+        header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=1000');
+            background-size: cover;
+            background-position: center;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(192, 57, 43, 0.5);
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        section {
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        h2 {
+            color: var(--accent-color);
+            font-size: 1.4rem;
+            margin-top: 0;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* Stats List */
+        .level-row {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #222;
+        }
+
+        .level-row:last-child { border-bottom: none; }
+
+        .checkbox-container {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            user-select: none;
+            width: 100%;
+        }
+
+        .checkbox-container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 2px;
+            left: 0;
+            height: 22px;
+            width: 22px;
+            background-color: #333;
+            border-radius: 4px;
+        }
+
+        .checkbox-container:hover input ~ .checkmark {
+            background-color: #444;
+        }
+
+        .checkbox-container input:checked ~ .checkmark {
+            background-color: var(--accent-color);
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .checkbox-container input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        .checkbox-container .checkmark:after {
+            left: 8px;
+            top: 4px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .level-text {
+            color: var(--text-color);
+        }
+
+        input:checked + .level-text {
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+
+        .level-num {
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-right: 8px;
+        }
+
+        /* Skills/Gear items */
+        .item-box {
+            margin-bottom: 15px;
+        }
+
+        .item-title {
+            font-weight: bold;
+            color: #fff;
+            display: block;
+        }
+
+        .item-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .tag {
+            display: inline-block;
+            background: #333;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        .tag-red { background: rgba(192, 57, 43, 0.2); color: #ff7675; border: 1px solid #c0392b; }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--nav-bg);
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            border-top: 1px solid var(--border-color);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.7rem;
+            transition: color 0.2s;
+            flex: 1;
+        }
+
+        .nav-item.active {
+            color: var(--accent-color);
+        }
+
+        .nav-icon {
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+        }
+
+        /* Utilities */
+        .mt-20 { margin-top: 20px; }
+        .bonus-box {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 15px;
+            margin: 15px 0;
+            background: rgba(192, 57, 43, 0.05);
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Crimson Queen</h1>
+    <div class="subtitle">Necromancer Honour Build</div>
+</header>
+
+<div class="container">
+    <!-- Overview Section -->
+    <section id="overview" class="active">
+        <div class="card">
+            <h2>Overview</h2>
+            <p>High-damage physical Necromancer designed for Honour mode. Focuses on Intelligence and Warfare to maximize physical spell damage, utilizing blood surfaces for AP reduction via Elemental Affinity.</p>
+            <div class="bonus-box">
+                <strong>Recommended Races:</strong><br>
+                Elf (Best for Flesh Sacrifice), Human, or Undead Human.
+            </div>
+        </div>
+        <div class="card">
+            <h2>Core Mechanics</h2>
+            <div class="item-box">
+                <span class="item-title">Elemental Affinity</span>
+                <span class="item-desc">Stand in blood (via Flesh Sacrifice or Blood Rain) to reduce Necromancy spell costs by 1 AP.</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Shield Maintenance</span>
+                <span class="item-desc">Use a Human ally's Encourage or +CON gear to offset the Constitution loss from Flesh Sacrifice so you don't drop your shield.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progression Section -->
+    <section id="progression">
+        <div class="card">
+            <h2>Stats Progression</h2>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 15px;">Tap levels to mark as complete. Progress is saved locally.</p>
+            <div id="level-list">
+                <!-- Levels will be injected here for cleaner code or just hardcoded for simplicity -->
+            </div>
+        </div>
+        <div class="card">
+            <h2>Permanent Bonuses</h2>
+            <div class="item-box">
+                <span class="item-title">Academy Lesson</span>
+                <span class="item-desc">Lesson of INT (+5 INT / -5 FIN)</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Spider Kiss Talent</span>
+                <span class="item-desc">Dragon (+2 WIT / -2 CON)</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Civil Abilities</span>
+                <span class="item-desc">Thievery (1st) → Sneaking (2nd)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gear Section -->
+    <section id="gear">
+        <div class="card">
+            <h2>Gear Priorities</h2>
+            <div class="tag tag-red">+Warfare</div>
+            <div class="tag tag-red">+Scoundrel</div>
+            <div class="tag tag-red">+INT</div>
+            <div class="tag tag-red">+Wits</div>
+            <div class="tag">+Crit Chance</div>
+            <p class="item-desc mt-20">Look for belts with 2-4% Crit. Items with Huntsman, Aero, Hydro, or Pyro allow you to respec base points into Warfare.</p>
+        </div>
+        
+        <div class="card">
+            <h2>Unique Items</h2>
+            <div class="item-box">
+                <span class="item-title">Fang of Winter Dragon (Early)</span>
+                <span class="item-desc">+1 STR, +1 INT, +1 Warfare, +1 Hydro, +10% Crit.</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Eternal Stormblade (Late)</span>
+                <span class="item-desc">+3 Memory, +6 Initiative, +15% Crit.</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Rancour Dagger (Late)</span>
+                <span class="item-desc">+3 Wits, +3 Finesse, +25% Crit (Requires 14 FIN).</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Runes & Frames</h2>
+            <div class="item-box">
+                <span class="item-title">Amulet/Ring/Weapon</span>
+                <span class="item-desc">Flame Rune (+Crit/Fire Dmg) + Power Frame (+INT).</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Eternal Artefacts</span>
+                <span class="item-desc">Use on Rings for +1 Scoundrel.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="card">
+            <h2>Early Game (1-8)</h2>
+            <div class="item-box">
+                <span class="item-title">Raise Bloated Corpse</span>
+                <span class="item-desc">1 AP offense. Use it for the explosion.</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Bouncing Shield</span>
+                <span class="item-desc">Massive damage based on shield armor.</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Corpse Explosion</span>
+                <span class="item-desc">High AoE physical damage (requires a corpse).</span>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Mid Game (9-15)</h2>
+            <div class="item-box">
+                <span class="item-title">Mass Corpse Explosion</span>
+                <span class="item-desc">Clears rooms if multiple corpses are present.</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Grasp of the Starved</span>
+                <span class="item-desc">Massive AoE damage to enemies on blood.</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Skin Graft</span>
+                <span class="item-desc">Resets all cooldowns. Core for burst.</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Late Game (16+)</h2>
+            <div class="item-box">
+                <span class="item-title">Apotheosis</span>
+                <span class="item-desc">Removes Source costs for 2 turns.</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Blood Storm</span>
+                <span class="item-desc">Massive 2-turn AoE physical damage.</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Inner Demon</span>
+                <span class="item-desc">Boosts INT and Magic Armor.</span>
+            </div>
+        </div>
+    </section>
+</div>
+
+<nav>
+    <a href="#" class="nav-item active" onclick="showSection('overview', this)">
+        <span class="nav-icon">📜</span>
+        <span>Overview</span>
+    </a>
+    <a href="#" class="nav-item" onclick="showSection('progression', this)">
+        <span class="nav-icon">📈</span>
+        <span>Leveling</span>
+    </a>
+    <a href="#" class="nav-item" onclick="showSection('gear', this)">
+        <span class="nav-icon">⚔️</span>
+        <span>Gear</span>
+    </a>
+    <a href="#" class="nav-item" onclick="showSection('skills', this)">
+        <span class="nav-icon">🔥</span>
+        <span>Skills</span>
+    </a>
+</nav>
+
+<script>
+    const levels = [
+        "1: 13 INT, 1 Warfare, 1 Necro, Talent: Executioner",
+        "2: 15 INT, 1 Pyro",
+        "3: 17 INT, 2 Necro, Talent: Glass Cannon",
+        "4: 19 INT, 1 Aero",
+        "5: 21 INT, 2 Aero",
+        "6: 23 INT, 11 Mem, 1 Poly",
+        "7: 25 INT, 1 Huntsman",
+        "8: 27 INT, 2 Huntsman, Talent: Elemental Affinity",
+        "9: 28 INT, 12 Mem, 2 Pyro",
+        "10: 30 INT, 13 Mem, 2 Poly",
+        "11: 31 INT, 15 Mem, 3 Poly",
+        "12: 32 INT, 16 Mem, 1 Hydro",
+        "13: 18 Mem, 3 Necro, Talent: Savage Sortilege",
+        "14: 34 INT, 1 Scoundrel",
+        "15: 37 INT, 4 Poly",
+        "16: 39 INT, 19 Mem, 5 Poly",
+        "17: 40 INT, 11 WIT, 2 Hydro",
+        "18: 21 Mem, 12 WIT, 3 Hydro, Talent: Hothead",
+        "19: 13 WIT, 2 Warfare",
+        "20: 15 WIT, 3 Warfare",
+        "21: 17 WIT, 4 Warfare"
+    ];
+
+    function initLevels() {
+        const list = document.getElementById('level-list');
+        const saved = JSON.parse(localStorage.getItem('crimsonQueenLevels') || '{}');
+        
+        levels.forEach((text, index) => {
+            const div = document.createElement('div');
+            div.className = 'level-row';
+            const isChecked = saved[index] ? 'checked' : '';
+            
+            div.innerHTML = `
+                <label class="checkbox-container">
+                    <input type="checkbox" ${isChecked} onchange="saveProgress(${index}, this.checked)">
+                    <span class="checkmark"></span>
+                    <span class="level-text">${text}</span>
+                </label>
+            `;
+            list.appendChild(div);
+        });
+    }
+
+    function saveProgress(index, checked) {
+        const saved = JSON.parse(localStorage.getItem('crimsonQueenLevels') || '{}');
+        if (checked) saved[index] = true;
+        else delete saved[index];
+        localStorage.setItem('crimsonQueenLevels', JSON.stringify(saved));
+    }
+
+    function showSection(id, el) {
+        document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        el.classList.add('active');
+        
+        window.scrollTo(0,0);
+    }
+
+    window.onload = initLevels;
+</script>
+
+</body>
+</html>
