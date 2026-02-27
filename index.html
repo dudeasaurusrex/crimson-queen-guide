@@ -264,7 +264,7 @@
             <p>High-damage physical Necromancer designed for Honour mode. Focuses on Intelligence and Warfare to maximize physical spell damage, utilizing blood surfaces for AP reduction via Elemental Affinity.</p>
             <div class="bonus-box">
                 <strong>Recommended Races:</strong><br>
-                Elf (Best for Flesh Sacrifice), Human, or Undead Human.
+                Elf (Best for Flesh Sacrifice), Human, or Undead Human (4-man party focus).
             </div>
         </div>
         <div class="card">
@@ -286,7 +286,7 @@
             <h2>Stats Progression</h2>
             <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 15px;">Tap levels to mark as complete. Progress is saved locally.</p>
             <div id="level-list">
-                <!-- Levels will be injected here for cleaner code or just hardcoded for simplicity -->
+                <!-- Levels injected via JS -->
             </div>
         </div>
         <div class="card">
@@ -315,30 +315,54 @@
             <div class="tag tag-red">+INT</div>
             <div class="tag tag-red">+Wits</div>
             <div class="tag">+Crit Chance</div>
-            <p class="item-desc mt-20">Look for belts with 2-4% Crit. Items with Huntsman, Aero, Hydro, or Pyro allow you to respec base points into Warfare.</p>
+            <p class="item-desc mt-20">Look for belts with 2-4% Crit. Items with Huntsman, Aero, Hydro, or Pyro allow you to respec base points into Warfare and Scoundrel for maximum damage.</p>
         </div>
         
         <div class="card">
             <h2>Unique Items</h2>
             <div class="item-box">
-                <span class="item-title">Fang of Winter Dragon (Early)</span>
+                <span class="item-title">Ring of Intelligence</span>
+                <span class="item-desc">Use one with a rune slot. Plug with Power Frame Flame Rune (+3 INT, +6% Crit).</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Viper Tongue (Early Weapon)</span>
+                <span class="item-desc">+1 STR, +1 Warfare.</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Fang of Winter Dragon (Early Weapon)</span>
                 <span class="item-desc">+1 STR, +1 INT, +1 Warfare, +1 Hydro, +10% Crit.</span>
             </div>
             <div class="item-box">
-                <span class="item-title">Eternal Stormblade (Late)</span>
+                <span class="item-title">Eternal Stormblade (Late Weapon)</span>
                 <span class="item-desc">+3 Memory, +6 Initiative, +15% Crit.</span>
             </div>
             <div class="item-box">
-                <span class="item-title">Rancour Dagger (Late)</span>
+                <span class="item-title">Rancour Dagger (Late Weapon)</span>
                 <span class="item-desc">+3 Wits, +3 Finesse, +25% Crit (Requires 14 FIN).</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Soft Touch (Arx Gloves)</span>
+                <span class="item-desc">+5 INT, +5 Memory.</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Luronta Temva (Arx Legs)</span>
+                <span class="item-desc">+2 to all main stats, +2 Aero.</span>
             </div>
         </div>
 
         <div class="card">
             <h2>Runes & Frames</h2>
             <div class="item-box">
-                <span class="item-title">Amulet/Ring/Weapon</span>
-                <span class="item-desc">Flame Rune (+Crit/Fire Dmg) + Power Frame (+INT).</span>
+                <span class="item-title">Amulet / Ring</span>
+                <span class="item-desc">Flame Rune (+Crit Chance) + Power Frame (+INT).</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Armor</span>
+                <span class="item-desc">Flame Rune (+Fire Res) + Power Frame (+INT).</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Weapon</span>
+                <span class="item-desc">Flame Rune (+Fire Damage) + Power Frame (+INT).</span>
             </div>
             <div class="item-box">
                 <span class="item-title">Eternal Artefacts</span>
@@ -353,7 +377,15 @@
             <h2>Early Game (1-8)</h2>
             <div class="item-box">
                 <span class="item-title">Raise Bloated Corpse</span>
-                <span class="item-desc">1 AP offense. Use it for the explosion.</span>
+                <span class="item-desc">Cheap 1 AP offense/explosion.</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Mosquito Swarm</span>
+                <span class="item-desc">Ranged damage + heal.</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Decaying Touch</span>
+                <span class="item-desc">Physical damage + Decay debuff.</span>
             </div>
             <div class="item-box">
                 <span class="item-title">Bouncing Shield</span>
@@ -361,7 +393,19 @@
             </div>
             <div class="item-box">
                 <span class="item-title">Corpse Explosion</span>
-                <span class="item-desc">High AoE physical damage (requires a corpse).</span>
+                <span class="item-desc">High AoE damage (requires a corpse).</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Infect</span>
+                <span class="item-desc">Strong single target + Disease debuff.</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Teleportation</span>
+                <span class="item-desc">Group enemies for AoE or drop them for impact damage.</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Tactical Retreat</span>
+                <span class="item-desc">Mobility + Haste.</span>
             </div>
         </div>
         
@@ -377,7 +421,19 @@
             </div>
             <div class="item-box">
                 <span class="item-title">Skin Graft</span>
-                <span class="item-desc">Resets all cooldowns. Core for burst.</span>
+                <span class="item-desc">Resets all cooldowns (Adrenaline, Teleport, etc.).</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Blood Rain</span>
+                <span class="item-desc">Sets up blood surfaces for Elemental Affinity.</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Adrenaline</span>
+                <span class="item-desc">Burst AP for finishing kills.</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Peace of Mind</span>
+                <span class="item-desc">Buffs damage and Crit Chance.</span>
             </div>
         </div>
 
@@ -394,6 +450,10 @@
             <div class="item-box">
                 <span class="item-title">Inner Demon</span>
                 <span class="item-desc">Boosts INT and Magic Armor.</span>
+            </div>
+            <div class="item-box">
+                <span class="item-title">Challenge</span>
+                <span class="item-desc">Free damage/armor buff if the target dies.</span>
             </div>
         </div>
     </section>
